@@ -1,0 +1,40 @@
+.add-todo {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0;
+}
+
+.todo-input {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 15px;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: #FFC1C1;
+  border-radius: 15px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #663C3C;
+}
+
+.add-button {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  width: 80px;
+  height: 48px;
+
+  background: #F38989;
+  border-radius: 15px;
+  color: #FFFFFF;
+  margin-left: 22px;
+  border: none;
+  outline: none;
+}

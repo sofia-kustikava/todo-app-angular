@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #FFECEC;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #FFFFFF;
+
+  margin: 10px;
+  padding: 12px 24px;
+
+  background: #F38989;
+  border-radius: 15px;
+  outline: none;
+  border: none;
+}
+
+input {
+  &.ng-invalid.ng-touched {
+    border: 1px solid #663C3C;
+  }
+
+  &.ng-valid {
+    border: none;
+  }
+}
+
+.warning {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  color: #663C3C;
+}

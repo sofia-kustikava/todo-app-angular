@@ -1,0 +1,41 @@
+.block {
+  width: 500px;
+  padding: 20px;
+  margin: 20px;
+
+  background: rgba(255, 178, 178, 0.7);
+  border-radius: 36px;
+}
+
+.todo-text {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  background: none;
+
+  color: #663C3C;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: right;
+}
+
+.input-text {
+  padding: 0 10px;
+  height: 40px;
+  margin: 13px 0;
+  width: 90%;
+
+  background: #FEA4A4;
+  border-radius: 15px;
+
+  border: none;
+  outline: none;
+}
+

@@ -1,0 +1,16 @@
+.main-text {
+  display: flex;
+  justify-content: center;
+
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  color: #663C3C;
+  margin: 30px;
+}
+
+.body-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
