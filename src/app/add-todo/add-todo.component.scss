@@ -10,6 +10,7 @@
   display: block;
   width: 100%;
   max-width: 400px;
+  max-height: 40px;
   padding: 10px 15px;
   appearance: none;
   border: none;
@@ -37,4 +38,16 @@
   margin-left: 22px;
   border: none;
   outline: none;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.show-todos {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
 }

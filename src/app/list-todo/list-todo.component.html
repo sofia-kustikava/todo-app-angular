@@ -1,8 +1,9 @@
-<div (click)="onTodoClicked()" [class.completed]="todo.completed">
-  <form *ngIf="!isEdit; else editable" class="block">
-    <p class="todo-text">{{todo.content}}</p>
+<div (click)="onTodoClicked()" [class.completed]="todo.completed" >
+  <form *ngIf="!isEdit; else editable" class="block" >
+    <p class="todo-text" [colorType]="isChanged">{{todo.content}}</p>
     <div class="buttons" (click)="$event.stopPropagation()">
-      <button class="btn" (click)="isEdit = !isEdit">Edit</button>
+      <button class="btn" (click)="isChanged = !isChanged">Change</button>
+      <button class="btn" (click)="isEdit = !isEdit; onInput()">Edit</button>
       <button class="btn"  (click)="onDeleteClicked()">Delete</button>
     </div>
   </form>
@@ -11,7 +12,7 @@
   <ng-template #editable>
     <form class="block" [formGroup]="form">
       <input class="todo-text input-text"
-             placeholder="Edit todo"
+             placeholder="Write something..."
              name="inputText"
              [(ngModel)] = "inputText"
              formControlName="inputText"

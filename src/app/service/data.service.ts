@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Todo} from "../model/todo.model";
 
 @Injectable({
@@ -7,17 +7,24 @@ import {Todo} from "../model/todo.model";
 export class DataService {
 
   todos: Todo[] = [
-    new Todo('Need to leans the basics'),
-    new Todo('After learning the basics')
+    {
+    content: 'Need to leans the basics',
+    completed: false
+    },
+    {
+      content: 'After learning the basics',
+      completed: false
+    }
   ]
 
-  constructor() { }
+  constructor() {
+  }
 
   getAllTodos() {
     return this.todos
   }
 
-  updateTodo(index: number, updatedTodo : Todo) {
+  updateTodo(index: number, updatedTodo: Todo) {
     console.log('test: ', index, updatedTodo)
     this.todos[index].content = updatedTodo.content;
 

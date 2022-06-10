@@ -1,32 +1,40 @@
-<form class="add-todo" (submit)="onFormSubmit()" [formGroup]="form">
-  <input type="text" name="input"
-         placeholder="Enter what to do..."
-         class="todo-input"
-         formControlName="addText"
-         [(ngModel)]="inputTodo"
-  >
-  <button
-    class="add-button"
-    type="submit"
-    [disabled]="form.invalid"
-  >Add
-  </button>
-</form>
+<div class="main">
+  <div class="add-todo" (submit)="onFormSubmit()" [formGroup]="form">
+    <input type="text" name="input"
+           placeholder="Enter what to do..."
+           class="todo-input"
+           formControlName="addText"
+           [(ngModel)]="inputTodo"
+    >
+    <button
+      class="add-button"
+      type="submit"
+      [disabled]="form.invalid"
+    >Add
+    </button>
+  </div>
 
-<div *ngIf="form.get('addText')?.invalid && form.get('addText')?.touched">
-  <small class="warning"
-         *ngIf="form.get('addText')?.errors?.['required']"
-  >Write something...</small>
-  <small class="warning"
-         *ngIf="form.get('addText')?.errors?.['maxLength']"
-  >That's too big, sport! Try to do less</small>
+  <div *ngIf="form.get('addText')?.invalid && form.get('addText')?.touched">
+    <small class="warning"
+           *ngIf="form.get('addText')?.errors?.['required']"
+    >Write something...</small>
+    <small class="warning"
+           *ngIf="form.get('addText')?.errors?.['max-length']"
+    >That's too big, sport! Try to do less</small>
+  </div>
+  <div class="show-todos">
+    <button class="btn" *ngIf="isVisible; else hidden" (click)="isVisible = !isVisible">Hide Todos</button>
+    <ng-template #hidden>
+      <button class="btn" *ngIf="!isVisible" (click)="isVisible = !isVisible">Show Todos</button>
+    </ng-template>
+  </div>
+  <section *showTodos="!isVisible">
+    <app-list-todo
+      *ngFor="let todo of todos; let i = index"
+      [todo]="todo"
+      (todoClicked)="toggleCompleted(todo)"
+      (saveClicked)="saveTodo($event, i)"
+      (deleteClicked)="deleteTodo(todo)"
+    ></app-list-todo>
+  </section>
 </div>
-<section>
-  <app-list-todo
-    *ngFor="let todo of todos; let i = index"
-    [todo]="todo"
-    (todoClicked)="toggleCompleted(todo)"
-    (saveClicked)="saveTodo($event, i)"
-    (deleteClicked)="deleteTodo(todo)"
-  ></app-list-todo>
-</section>

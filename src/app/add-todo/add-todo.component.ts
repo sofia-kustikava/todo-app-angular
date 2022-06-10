@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../service/data.service";
 import {Todo} from "../model/todo.model";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-add-todo',
@@ -10,26 +10,31 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class AddTodoComponent implements OnInit {
 
+  isVisible = false
+  isUrgent: boolean = false
+
   form: FormGroup
 
-  inputTodo = ''
+  inputTodo: string = ''
 
   todos: Todo[]
-  showValidationErrors: boolean
-
-  content: string = '';
 
   constructor(private dataService: DataService) {
   }
 
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos()
+
     this.form = new FormGroup({
       addText: new FormControl('', [
         Validators.maxLength(40),
         Validators.required]
-      )
+      ),
+      isUrgent: new FormControl(null),
+      date: new FormControl(Date.now())
     })
+
+
   }
 
   onFormSubmit() {
@@ -37,6 +42,7 @@ export class AddTodoComponent implements OnInit {
       content: this.inputTodo,
       completed: false
     })
+    this.inputTodo = ''
   }
 
   toggleCompleted(todo: Todo) {
@@ -44,8 +50,6 @@ export class AddTodoComponent implements OnInit {
   }
 
   saveTodo(input: string, i: number): void {
-    console.log(input)
-    console.log(i)
     this.todos[i].content = input
   }
 
