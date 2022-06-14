@@ -8,6 +8,7 @@ import { ListTodoComponent } from './list-todo/list-todo.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ColorDirective } from './diretive/color.directive';
 import { ShowDirective } from './diretive/show.directive';
+import {StorageService} from "./service/storage.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ShowDirective } from './diretive/show.directive';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

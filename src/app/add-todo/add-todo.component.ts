@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {DataService} from "../service/data.service";
 import {Todo} from "../model/todo.model";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-add-todo',
@@ -24,25 +24,32 @@ export class AddTodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos()
-
     this.form = new FormGroup({
       addText: new FormControl('', [
         Validators.maxLength(40),
         Validators.required]
-      ),
-      isUrgent: new FormControl(null),
-      date: new FormControl(Date.now())
+      )
     })
 
-
+    // this.form = new FormGroup({
+    //   addText: new FormControl('', [
+    //     Validators.maxLength(40),
+    //     Validators.required]
+    //   ),
+    //   isUrgent: new FormControl(null),
+    //   date: new FormControl(Date.now())
+    // })
   }
 
   onFormSubmit() {
+    // let todo = this.form.getRawValue()
+    // this.addTodo.emit(todo);
+    // this.form.reset()
     this.todos.push({
       content: this.inputTodo,
       completed: false
     })
-    this.inputTodo = ''
+    // this.inputTodo = ''
   }
 
   toggleCompleted(todo: Todo) {

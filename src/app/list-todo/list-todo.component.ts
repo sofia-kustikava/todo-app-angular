@@ -49,14 +49,4 @@ export class ListTodoComponent implements OnInit {
   onSaveClicked(input: string) {
     this.saveClicked.emit(input)
   }
-
-  public changeColor(changed : boolean): void {
-    if (changed) {
-      console.log('1')
-      this.color = 'green'
-    } else {
-      console.log('2')
-      this.color = ''
-    }
-  }
 }

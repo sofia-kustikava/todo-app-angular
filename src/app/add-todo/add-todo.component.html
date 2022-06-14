@@ -1,18 +1,22 @@
 <div class="main">
-  <div class="add-todo" (submit)="onFormSubmit()" [formGroup]="form">
+  <form class="add-todo"  [formGroup]="form">
     <input type="text" name="input"
            placeholder="Enter what to do..."
            class="todo-input"
            formControlName="addText"
            [(ngModel)]="inputTodo"
     >
+    <div>
+      <label for="isUrgent">Urgent</label>
+      <input type="checkbox" id="isUrgent" formControlName="isUrgent">
+    </div>
     <button
       class="add-button"
-      type="submit"
+      (click)="onFormSubmit()"
       [disabled]="form.invalid"
     >Add
     </button>
-  </div>
+  </form>
 
   <div *ngIf="form.get('addText')?.invalid && form.get('addText')?.touched">
     <small class="warning"
