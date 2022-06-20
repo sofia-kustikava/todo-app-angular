@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Todo} from "../model/todo.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   templateUrl: './list-todo.component.html',
   styleUrls: ['./list-todo.component.scss']
 })
-export class ListTodoComponent implements OnInit, OnChanges {
+export class ListTodoComponent implements OnChanges {
 
   form: FormGroup;
 
@@ -17,7 +17,6 @@ export class ListTodoComponent implements OnInit, OnChanges {
   public color: string = '';
 
   @Input() todo: Todo;
-
   @Output() deleteClicked: EventEmitter<void> = new EventEmitter();
   @Output() saveClicked: EventEmitter<Todo> = new EventEmitter();
 
@@ -40,13 +39,6 @@ export class ListTodoComponent implements OnInit, OnChanges {
         isUrgent: todo.isUrgent
       })
     }
-  }
-
-  ngOnInit(): void {
-  }
-
-  onTodoEdit(): void {
-    this.form.get('content').setValue(this.todo.content);
   }
 
   onDeleteClicked(): void {

@@ -1,4 +1,4 @@
-<div [class.completed]="todo.completed" >
+<div [class.completed]="todo.completed">
   <form class="block" [formGroup]="form">
     <p *ngIf="!isEdit" class="todo-text" [colorType]="isChanged">{{todo.content}}</p>
     <ng-container *ngIf="isEdit">
@@ -21,8 +21,9 @@
       <button *ngIf="isEdit" class="btn"
               (click)="onSaveClicked()"
               [disabled]="form.invalid"
-      >Save</button>
-      <button class="btn"  (click)="onDeleteClicked()">Delete</button>
+      >Save
+      </button>
+      <button class="btn" (click)="onDeleteClicked()">Delete</button>
     </div>
   </form>
 </div>

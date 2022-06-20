@@ -31,4 +31,9 @@ export class AppComponent implements OnInit {
     this.todos.push(todo);
     this.dataService.addTodo(todo);
   }
+
+  visible(): void {
+    this.isVisible=!this.isVisible
+  }
+
 }
