@@ -5,9 +5,14 @@
            class="todo-input"
            formControlName="content"
     >
-    <div>
-      <label for="isUrgent">Urgent</label>
-      <input type="checkbox" id="isUrgent" formControlName="isUrgent">
+    <div class="is-urgent">
+      <label class="toggler-wrapper style-3" for="isUrgent">
+        <input type="checkbox" id="isUrgent" formControlName="isUrgent">
+        <div class="toggler-slider">
+          <div class="toggler-knob"></div>
+        </div>
+      </label>
+      <div class="urgent-name">Urgent</div>
     </div>
     <button
       class="add-button"

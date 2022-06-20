@@ -7,17 +7,6 @@ import {todoKey} from "../keys/const";
 })
 export class DataService {
 
-  updateTodo(index: number, updatedTodo: Todo): void {
-    const todos = this.getTodos();
-    todos[index] = updatedTodo;
-    this.setTodos(todos);
-  }
-
-  deleteTodo(index: number) : void {
-    const todos = this.getTodos().splice(index, 1);
-    this.setTodos(todos);
-  }
-
   addTodo(todo: Todo) : void {
     const todos = this.getTodos();
     todos.push(todo);

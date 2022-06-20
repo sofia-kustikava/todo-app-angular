@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {DataService} from "../service/data.service";
 import {Todo} from "../model/todo.model";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-add-todo',
@@ -12,13 +11,11 @@ export class AddTodoComponent implements OnInit {
 
   @Output() public submitSend = new EventEmitter<Todo>();
 
-  isUrgent: boolean = false;
+  public isUrgent: boolean = false;
 
   public form: FormGroup;
 
-  todos: Todo[] = this.dataService.getTodos();
-
-  constructor(private dataService: DataService, private fb : FormBuilder) {
+  constructor(private fb : FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -28,7 +25,7 @@ export class AddTodoComponent implements OnInit {
         Validators.required,
         Validators.nullValidator]
       ],
-      isUrgent: [false]
+      isUrgent: [null]
     })
   }
 

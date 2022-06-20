@@ -20,11 +20,13 @@ export class AppComponent implements OnInit {
   }
 
   updateTodo(todo: Todo, index: number): void {
-    this.dataService.updateTodo(index, todo);
+    this.todos[index] = todo;
+    this.dataService.setTodos(this.todos);
   }
 
   deleteTodo(index: number): void {
-    this.dataService.deleteTodo(index);
+    this.todos.splice(index, 1)
+    this.dataService.setTodos(this.todos);
   }
 
   public addTodo(todo: Todo): void {
