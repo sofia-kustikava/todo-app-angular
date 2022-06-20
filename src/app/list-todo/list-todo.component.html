@@ -17,13 +17,13 @@
       </div>
     </ng-container>
     <div class="buttons" (click)="$event.stopPropagation()">
-      <button *ngIf="!isEdit" class="btn" (click)="toggleTodoEdit()">Edit</button>
-      <button *ngIf="isEdit" class="btn"
+      <button type="button" *ngIf="!isEdit" class="btn" (click)="toggleTodoEdit()">Edit</button>
+      <button type="button" *ngIf="isEdit" class="btn"
               (click)="onSaveClicked()"
               [disabled]="form.invalid"
       >Save
       </button>
-      <button class="btn" (click)="onDeleteClicked()">Delete</button>
+      <button type="button" class="btn" (click)="onDeleteClicked()">Delete</button>
     </div>
   </form>
 </div>

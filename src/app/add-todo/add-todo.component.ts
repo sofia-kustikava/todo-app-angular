@@ -25,7 +25,7 @@ export class AddTodoComponent implements OnInit {
         Validators.required,
         Validators.nullValidator]
       ],
-      isUrgent: [null]
+      isUrgent: [false]
     })
   }
 
