@@ -7,9 +7,9 @@ export class ColorDirective {
 
   @Input('colorType') set color(isChanged: boolean) {
     if(isChanged) {
-      this.r.setStyle(this.el.nativeElement, 'color', '#40ef24')
+      this.r.setStyle(this.el.nativeElement, 'color', '#40ef24');
     } else {
-      this.r.setStyle(this.el.nativeElement, 'color', '#663C3C')
+      this.r.setStyle(this.el.nativeElement, 'color', '#663C3C');
     }
   }
 

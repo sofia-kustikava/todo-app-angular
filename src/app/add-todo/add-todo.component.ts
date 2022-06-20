@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {DataService} from "../service/data.service";
 import {Todo} from "../model/todo.model";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-add-todo',
@@ -10,59 +10,30 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class AddTodoComponent implements OnInit {
 
-  isVisible = false
-  isUrgent: boolean = false
+  @Output() public submitSend = new EventEmitter<Todo>();
 
-  form: FormGroup
+  isUrgent: boolean = false;
 
-  inputTodo: string = ''
+  public form: FormGroup;
 
-  todos: Todo[]
+  todos: Todo[] = this.dataService.getTodos();
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private fb : FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.todos = this.dataService.getAllTodos()
-    this.form = new FormGroup({
-      addText: new FormControl('', [
+    this.form = this.fb.group({
+      content: ['', [
         Validators.maxLength(40),
-        Validators.required]
-      )
+        Validators.required,
+        Validators.nullValidator]
+      ],
+      isUrgent: [false]
     })
-
-    // this.form = new FormGroup({
-    //   addText: new FormControl('', [
-    //     Validators.maxLength(40),
-    //     Validators.required]
-    //   ),
-    //   isUrgent: new FormControl(null),
-    //   date: new FormControl(Date.now())
-    // })
   }
 
-  onFormSubmit() {
-    // let todo = this.form.getRawValue()
-    // this.addTodo.emit(todo);
-    // this.form.reset()
-    this.todos.push({
-      content: this.inputTodo,
-      completed: false
-    })
-    // this.inputTodo = ''
+  onFormSubmit(): void {
+    this.submitSend.emit(this.form.getRawValue());
+    this.form.reset();
   }
-
-  toggleCompleted(todo: Todo) {
-    todo.completed = !todo.completed;
-  }
-
-  saveTodo(input: string, i: number): void {
-    this.todos[i].content = input
-  }
-
-  deleteTodo(todo: Todo) {
-    const index = this.todos.indexOf(todo)
-    this.dataService.deleteTodo(index)
-  }
-
 }

@@ -7,9 +7,9 @@ export class ShowDirective {
 
   @Input() set showTodos(condition : boolean) {
     if(!condition) {
-      this.viewContainer.createEmbeddedView(this.templateRef)
+      this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
-      this.viewContainer.clear()
+      this.viewContainer.clear();
     }
   }
 

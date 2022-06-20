@@ -1,52 +1,64 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Todo} from "../model/todo.model";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-list-todo',
   templateUrl: './list-todo.component.html',
   styleUrls: ['./list-todo.component.scss']
 })
-export class ListTodoComponent implements OnInit {
+export class ListTodoComponent implements OnInit, OnChanges {
 
-  form: FormGroup
+  form: FormGroup;
 
-  isEdit: boolean = false
-  isChanged: boolean = false
-  inputText: string = ''
+  isEdit: boolean = false;
+  isChanged: boolean = false;
+  content: string = '';
   public color: string = '';
 
-  @Input() todo: Todo
+  @Input() todo: Todo;
 
-  @Output() todoClicked: EventEmitter<void> = new EventEmitter()
-  @Output() deleteClicked: EventEmitter<void> = new EventEmitter()
-  @Output() saveClicked: EventEmitter<string> = new EventEmitter()
+  @Output() deleteClicked: EventEmitter<void> = new EventEmitter();
+  @Output() saveClicked: EventEmitter<Todo> = new EventEmitter();
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-    this.form = new FormGroup({
-      inputText: new FormControl('', [
-        Validators.maxLength(50),
-        Validators.required]
-      )
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      content: ['', [
+        Validators.maxLength(40),
+        Validators.required,
+        Validators.nullValidator]
+      ],
+      isUrgent: [null]
     })
   }
 
-  onInput() {
-    this.inputText=this.todo.content
+  ngOnChanges(changes: SimpleChanges): void {
+    const todo = changes['todo'].currentValue;
+    if (todo) {
+      this.form.setValue({
+        content: todo.content,
+        isUrgent: todo.isUrgent
+      })
+    }
   }
 
-  onTodoClicked() {
-    this.todoClicked.emit()
+  ngOnInit(): void {
   }
 
-  onDeleteClicked() {
-    this.deleteClicked.emit()
+  onTodoEdit(): void {
+    this.form.get('content').setValue(this.todo.content);
   }
 
-  onSaveClicked(input: string) {
-    this.saveClicked.emit(input)
+  onDeleteClicked(): void {
+    this.deleteClicked.emit();
+  }
+
+  onSaveClicked(): void {
+    this.saveClicked.emit(this.form.getRawValue());
+    this.toggleTodoEdit();
+  }
+
+  toggleTodoEdit(): void {
+    this.isEdit = !this.isEdit;
   }
 }

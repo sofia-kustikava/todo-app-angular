@@ -1,37 +1,28 @@
-<div (click)="onTodoClicked()" [class.completed]="todo.completed" >
-  <form *ngIf="!isEdit; else editable" class="block" >
-    <p class="todo-text" [colorType]="isChanged">{{todo.content}}</p>
+<div [class.completed]="todo.completed" >
+  <form class="block" [formGroup]="form">
+    <p *ngIf="!isEdit" class="todo-text" [colorType]="isChanged">{{todo.content}}</p>
+    <ng-container *ngIf="isEdit">
+      <input class="todo-text input-text"
+             placeholder="Write something..."
+             name="content"
+             formControlName="content"
+      >
+      <div *ngIf="form.get('content')?.invalid && form.get('content')?.touched">
+        <small class="warning"
+               *ngIf="form.get('content')?.errors?.['required']"
+        >Write something...</small>
+        <small class="warning"
+               *ngIf="form.get('content')?.errors?.['maxLength']"
+        >That's too big, sport! Try to do less</small>
+      </div>
+    </ng-container>
     <div class="buttons" (click)="$event.stopPropagation()">
-      <button class="btn" (click)="isEdit = !isEdit; onInput()">Edit</button>
+      <button *ngIf="!isEdit" class="btn" (click)="toggleTodoEdit()">Edit</button>
+      <button *ngIf="isEdit" class="btn"
+              (click)="onSaveClicked()"
+              [disabled]="form.invalid"
+      >Save</button>
       <button class="btn"  (click)="onDeleteClicked()">Delete</button>
     </div>
   </form>
-
-
-  <ng-template #editable>
-    <form class="block" [formGroup]="form">
-      <input class="todo-text input-text"
-             placeholder="Write something..."
-             name="inputText"
-             [(ngModel)] = "inputText"
-             formControlName="inputText"
-      >
-      <div *ngIf="form.get('inputText')?.invalid && form.get('inputText')?.touched">
-        <small class="warning"
-               *ngIf="form.get('inputText')?.errors?.['required']"
-        >Write something...</small>
-        <small class="warning"
-               *ngIf="form.get('inputText')?.errors?.['maxLength']"
-        >That's too big, sport! Try to do less</small>
-      </div>
-      <div class="buttons">
-        <button class="btn"
-                (click)="onSaveClicked(inputText); isEdit = !isEdit"
-                [disabled]="form.invalid"
-        >Save</button>
-        <button class="btn" (click)="onDeleteClicked()">Delete</button>
-      </div>
-    </form>
-  </ng-template>
-
 </div>

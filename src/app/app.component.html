@@ -1,2 +1,16 @@
 <h1 class="main-text">What do you want to do?</h1>
-<router-outlet></router-outlet>
+<app-add-todo (submitSend)="addTodo($event)"></app-add-todo>
+<div class="show-todos">
+  <button class="btn" *ngIf="isVisible; else hidden" (click)="isVisible = !isVisible">Hide Todos</button>
+  <ng-template #hidden>
+    <button class="btn" *ngIf="!isVisible" (click)="isVisible = !isVisible">Show Todos</button>
+  </ng-template>
+</div>
+<section *showTodos="!isVisible">
+  <app-list-todo
+    *ngFor="let todo of todos; let index = index"
+    [todo]="todo"
+    (saveClicked)="updateTodo($event, index)"
+    (deleteClicked)="deleteTodo(index)"
+  ></app-list-todo>
+</section>
