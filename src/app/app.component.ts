@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Todo} from "./model/todo.model";
 import {DataService} from "./service/data.service";
 
@@ -9,11 +9,14 @@ import {DataService} from "./service/data.service";
 })
 export class AppComponent implements OnInit {
 
+  @Output() public showUrgentTodos = new EventEmitter<void>();
+
   ngOnInit(): void {
     this.todos = this.dataService.getTodos();
   }
 
   isVisible = false;
+  isShowUrgent = false;
   todos: Todo[];
 
   constructor(private dataService: DataService) {
@@ -35,7 +38,16 @@ export class AppComponent implements OnInit {
   }
 
   visible(): void {
-    this.isVisible=!this.isVisible
+    this.isVisible=!this.isVisible;
+  }
+
+  showUrgent(): void {
+    this.isShowUrgent=!this.isShowUrgent;
+  }
+
+  public showOnlyUrgent(isUrgent: boolean): void {
+    this.showUrgentTodos.emit();
+    this.isShowUrgent = isUrgent;
   }
 
 }

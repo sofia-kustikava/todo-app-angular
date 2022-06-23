@@ -1,11 +1,19 @@
 <h1 class="main-text">What do you want to do?</h1>
 <app-add-todo (submitSend)="addTodo($event)"></app-add-todo>
 <div class="show-todos">
-  <button class="btn" *ngIf="isVisible; else hidden" (click)="visible()">Hide Todos</button>
+
+</div>
+<div class="show-todos">
+  <button class="btn" *ngIf="!isVisible; else hidden" (click)="visible()">Show Todos</button>
   <ng-template #hidden>
-    <button class="btn" *ngIf="!isVisible" (click)="visible()">Show Todos</button>
+    <button class="btn" *ngIf="isVisible" (click)="visible()">Hide Todos</button>
+    <button class="btn" *ngIf="isShowUrgent; else urgent" (click)="showUrgent()">Show all</button>
+    <ng-template #urgent>
+      <button class="btn" *ngIf="!isShowUrgent" (click)="showUrgent(); showOnlyUrgent(true)">Only urgent</button>
+    </ng-template>
   </ng-template>
 </div>
+
 <section *showTodos="!isVisible">
   <app-list-todo
     *ngFor="let todo of todos; let index = index"
